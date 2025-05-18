@@ -1,6 +1,6 @@
 apiVersion: v2
 name: shell-app-chart
-description: A Helm chart for deploying a frontend SPA
+description: A Helm chart for deploying a Node.js application on Kubernetes with Cloudflare integration
 type: application
 version: 0.1.0
 appVersion: "1.0.0"

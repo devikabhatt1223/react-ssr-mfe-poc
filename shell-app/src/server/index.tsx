@@ -4,18 +4,12 @@ import express, { Request, Response } from "express";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { ChunkExtractor } from "@loadable/server";
+import './purge-cloudflare';
 import App from "../client/App";
-const PORT = process.env.PORT || 3001; // Changed to 3001 to avoid conflict with webpack dev server
+const PORT = process.env.PORT || 3010; // Changed to 3001 to avoid conflict with webpack dev server
 const app = express();
 
 const statsFile = path.resolve("./dist/client/loadable-stats.json");
-
-// Serve static files from the client build directory
-app.use(express.static(path.resolve(__dirname, "../../dist/client")));
-app.use(
-  "/favicon.ico",
-  express.static(path.resolve(__dirname, "../../public/favicon.ico"))
-);
 
 app.get("/api/items", (_req: Request, res: Response) => {
   const items = Array.from({ length: 10000 }, (_, i) => ({
@@ -25,8 +19,17 @@ app.get("/api/items", (_req: Request, res: Response) => {
   res.json(items);
 });
 
+
+// Serve static files from the client build directory
+app.use((req, res, next) => {
+  if (req.path.endsWith(".js") || req.path.endsWith(".css") || req.path.startsWith("/static") || req.path.includes("loadable-stats")) {
+    express.static(path.resolve(__dirname, "../../dist/client"))(req, res, next);
+  } else {
+    next(); // Allow SSR to handle it
+  }
+});
+
 app.get("*", (req: Request, res: Response) => {
-  console.log("SSR rendering URL:", req.url);
   const extractor = new ChunkExtractor({ statsFile, entrypoints: ["shell"] });
 
   const jsx = extractor.collectChunks(
@@ -37,7 +40,7 @@ app.get("*", (req: Request, res: Response) => {
   const appHtml = renderToString(jsx);
   const scriptTags = extractor.getScriptTags();
 
-  const indexFile = path.resolve(__dirname, "../../public/index.html");
+  const indexFile = path.resolve(__dirname, "../../dist/client/index.html");
   fs.readFile(indexFile, "utf8", (err, data) => {
     if (err) {
       console.error("Error reading index.html:", err);
@@ -56,6 +59,6 @@ app.get("*", (req: Request, res: Response) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`SSR server running on http://localhost:${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log(`SSR server running on http://localhost:${PORT}`);
+  });

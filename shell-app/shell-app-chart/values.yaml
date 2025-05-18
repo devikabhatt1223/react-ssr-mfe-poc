@@ -1,43 +1,48 @@
-replicaCount: 1
+# Default values for shell-app-chart.
 
+# Docker image for the Node.js app
 image:
-  repository: your-dockerhub-username/shell-app
-  tag: latest
-  pullPolicy: IfNotPresent
+  repository: "devikabhatt/shell-app"  # Replace with your Node.js app Docker image repository
+  tag: "latest"  # Docker image tag (e.g., version or "latest")
+  pullPolicy: IfNotPresent  # Image pull policy
 
-service:
+# Cloudflare settings for cache purging and integration
+cloudflare:
   enabled: true
-  type: ClusterIP
-  port: 80
+  zoneId: "fd5d377e7e58627da335bfd788c91840"  # Cloudflare zone ID
+  apiToken: "9bba1d86c6c05c1bd5a37131dfb6cc2b14d65"  # Cloudflare API token
+  purgeEverything: false  # Set to true if you want to purge everything on deployment
+
+# Node.js App specific environment variables
+env:
+  - name: NODE_ENV
+    value: "production"
+
+# Service configuration
+service:
+  type: ClusterIP  # Change to LoadBalancer if needed for external access
+  port: 80         # Expose Node.js app on port 80
 
 serviceAccount:
   create: true
   name: ""
-  automount: true
-  annotations: {}
 
+# Ingress configuration (optional)
 ingress:
   enabled: true
-  className: nginx
-  annotations: {}
-  hosts:
-    - host: spa.local
-      paths:
-        - path: /
-          pathType: Prefix
-  tls: []
+  hostname: "devika-poc.com"  # Replace with your domain name
+  path: "/"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
 
-extraEnvVars:
-  - name: NODE_ENV
-    value: production
-  - name: API_URL
-    value: "https://api.example.com"
-
+# Resources configuration (optional)
 resources: {}
+
+# Number of replicas
+replicaCount: 1
 
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 80
-

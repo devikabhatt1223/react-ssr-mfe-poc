@@ -15,12 +15,15 @@ spec:
         app: {{ include "shell-app-chart.fullname" . }}
     spec:
       containers:
-        - name: frontend
+        - name: node-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 80
+            - containerPort: 80  # Exposing the Node.js app
           env:
-            {{- with .Values.extraEnvVars }}
-            {{- toYaml . | nindent 12 }}
+            {{- range .Values.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
             {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

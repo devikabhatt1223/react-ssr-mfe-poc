@@ -1,0 +1,25 @@
+{{- if .Values.cloudflare.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cloudflare-cache-purge
+  annotations:
+    "helm.sh/hook": post-upgrade
+    "helm.sh/hook-weight": "10"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: cloudflare-purge
+          image: curlimages/curl:latest  # Using a simple curl image for the purge request
+          command:
+            - "sh"
+            - "-c"
+            - |
+              curl -X POST "https://api.cloudflare.com/client/v4/zones/{{ .Values.cloudflare.zoneId }}/purge_cache" \
+              -H "Authorization: Bearer {{ .Values.cloudflare.apiToken }}" \
+              -H "Content-Type: application/json" \
+              --data '{"purge_everything": {{ .Values.cloudflare.purgeEverything | quote }}}'
+      restartPolicy: Never
+{{- end }}
