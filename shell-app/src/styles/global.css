@@ -1,0 +1,204 @@
+:root {
+  --primary-color: #d94f4f; /* Warm tomato red */
+  --secondary-color: #f5a623; /* Soft amber orange */
+  --background-color: #fdf6f0; /* Off-white with warm undertone */
+  --text-color: #4a4a4a; /* Medium dark gray */
+  --nav-background: #fff3e0; /* Light creamy beige */
+  --nav-border: #f0c987; /* Light amber border */
+  --nav-link-color: #7f3f3f; /* Muted dark red */
+  --nav-link-hover: #d94f4f; /* Primary red for hover */
+  --card-shadow: rgba(169, 101, 83, 0.15) 0 4px 12px; /* Soft warm shadow */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-nav {
+  background-color: var(--nav-background);
+  border-bottom: 1px solid var(--nav-border);
+  padding: 1.5rem 1rem;
+  box-shadow: var(--card-shadow);
+  border-radius: 0 0 16px 16px;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-brand h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--nav-link-hover);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  align-items: center;
+  max-width: 600px;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #ccc;
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  margin: 2rem auto;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+}
+
+.error-fallback h2 {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.error-fallback button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.error-fallback button:hover {
+  background-color: #217dbb; /* a darker shade of primary */
+}
+
+.button-link {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: var(--primary-color); /* Solid background color */
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+  background-color: var(
+    --nav-link-hover
+  ); /* Slightly different color on hover */
+}
+
+.error-fallback {
+  padding: 2rem;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 12px;
+  border: 1px solid #f5c6cb;
+  text-align: center;
+  max-width: 500px;
+  margin: 3rem auto;
+  font-family: sans-serif;
+}
+
+.error-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  margin-bottom: 1.5rem;
+}
+
+.error-button {
+  padding: 0.5rem 1rem;
+  background-color: #721c24;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

@@ -1,0 +1,55 @@
+:root {
+  --primary-color: #d94f4f; /* Warm tomato red */
+  --secondary-color: #f5a623; /* Soft amber orange */
+  --background-color: #fdf6f0; /* Off-white with warm undertone */
+  --text-color: #4a4a4a; /* Medium dark gray */
+  --nav-background: #fff3e0; /* Light creamy beige */
+  --nav-border: #f0c987; /* Light amber border */
+  --nav-link-color: #7f3f3f; /* Muted dark red */
+  --nav-link-hover: #d94f4f; /* Primary red for hover */
+  --card-shadow: rgba(169, 101, 83, 0.15) 0 4px 12px; /* Soft warm shadow */
+}
+
+.remote-app {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  color: var(--text-color);
+  font-family: inherit;
+}
+
+.remote-nav {
+  background-color: var(--nav-background);
+  border-bottom: 1px solid var(--nav-border);
+  padding: 1rem;
+  box-shadow: var(--card-shadow);
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.remote-link {
+  color: white;
+  background-color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.remote-link:hover {
+  background-color: var(--nav-link-hover);
+}
+
+.remote-content > div {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin-top: 1.5rem;
+}
