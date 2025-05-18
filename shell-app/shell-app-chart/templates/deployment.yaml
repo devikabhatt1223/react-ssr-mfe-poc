@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "shell-app-chart.fullname" . }}
+  labels:
+    {{- include "shell-app-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "shell-app-chart.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "shell-app-chart.fullname" . }}
+    spec:
+      containers:
+        - name: frontend
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+          env:
+            {{- with .Values.extraEnvVars }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}

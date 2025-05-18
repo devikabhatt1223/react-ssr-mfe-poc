@@ -1,0 +1,43 @@
+replicaCount: 1
+
+image:
+  repository: your-dockerhub-username/shell-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+
+serviceAccount:
+  create: true
+  name: ""
+  automount: true
+  annotations: {}
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations: {}
+  hosts:
+    - host: spa.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+extraEnvVars:
+  - name: NODE_ENV
+    value: production
+  - name: API_URL
+    value: "https://api.example.com"
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
