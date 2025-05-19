@@ -9,8 +9,8 @@ image:
 # Cloudflare settings for cache purging and integration
 cloudflare:
   enabled: true
-  zoneId: "fd5d377e7e58627da335bfd788c91840"  # Cloudflare zone ID
-  apiToken: "9bba1d86c6c05c1bd5a37131dfb6cc2b14d65"  # Cloudflare API token
+  zoneId: "Zone ID-------"  # Cloudflare zone ID
+  apiToken: "API token---------"  # Cloudflare API token
   purgeEverything: false  # Set to true if you want to purge everything on deployment
 
 # Node.js App specific environment variables
@@ -30,7 +30,7 @@ serviceAccount:
 # Ingress configuration (optional)
 ingress:
   enabled: true
-  hostname: "devika-poc.com"  # Replace with your domain name
+  hostname: "hostname.com--------"  # Replace with your domain name
   path: "/"
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: "/"
