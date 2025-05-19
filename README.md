@@ -46,6 +46,14 @@ This project consists of three applications: **App1**, **App2**, and **Shell App
     npm run start
     ```
 
+## Application Screeshots
+   
+![Screenshot 2025-05-19 at 1 02 06 PM](https://github.com/user-attachments/assets/a81d0107-cb8c-4b80-845a-fa1e800cb4ce)
+
+
+![Screenshot 2025-05-19 at 1 06 43 PM](https://github.com/user-attachments/assets/a9171508-5e47-45cf-baec-1d891e139d0f)
+
+
 ---
 
 ## Additional Details
