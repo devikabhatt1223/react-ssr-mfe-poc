@@ -5,8 +5,12 @@
   "scripts": {
     "dev:client": "webpack --config webpack.client.js --mode development --watch",
     "dev:server": "webpack --config webpack.server.js --mode development --watch",
-    "dev:server-run": "wait-on dist/server/server.js && nodemon dist/server/server.js",
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\" \"npm run dev:server-run\""
+    "dev:server-run": "wait-on dist/server/server.js && nodemon dist/server/server.js --verbose",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\" \"npm run dev:server-run\"",
+    "build:client": "webpack --config webpack.client.js --mode production",
+    "build:server": "webpack --config webpack.server.js --mode production",
+    "build": "npm run build:client && npm run build:server && echo '✅ Build done'",
+    "start": "node --inspect dist/server/server.js"
   },
   "keywords": [],
   "author": "",

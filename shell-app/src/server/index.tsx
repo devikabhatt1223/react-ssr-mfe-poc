@@ -10,19 +10,21 @@ const app = express();
 
 const statsFile = path.resolve("./dist/client/loadable-stats.json");
 
-// Serve static files from the client build directory
-app.use(express.static(path.resolve(__dirname, "../../dist/client")));
-app.use(
-  "/favicon.ico",
-  express.static(path.resolve(__dirname, "../../public/favicon.ico"))
-);
-
 app.get("/api/items", (_req: Request, res: Response) => {
   const items = Array.from({ length: 10000 }, (_, i) => ({
     id: i + 1,
     name: `Item ${i + 1}`,
   }));
   res.json(items);
+});
+
+// Serve static files from the client build directory
+app.use((req, res, next) => {
+  if (req.path.endsWith(".js") || req.path.endsWith(".css") || req.path.startsWith("/static") || req.path.includes("loadable-stats")) {
+    express.static(path.resolve(__dirname, "../../dist/client"))(req, res, next);
+  } else {
+    next(); // Allow SSR to handle it
+  }
 });
 
 app.get("*", (req: Request, res: Response) => {

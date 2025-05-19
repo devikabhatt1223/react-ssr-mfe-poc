@@ -7,7 +7,6 @@ module.exports = merge(common, {
   entry: "./src/server/index.tsx",
   target: "node",
   mode: "development",
-  watch: true,
   externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, "dist/server"),

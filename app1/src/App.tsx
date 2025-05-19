@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Routes, Link } from "react-router-dom";
-import NonVirtualizeList from "./components/NonVirtualizeList";
-import VirtualizedList from "./components/VirtualizeList";
 import "./styles/index.css";
+
+const NonVirtualizeList = React.lazy(() => import("./components/NonVirtualizeList"));
+const VirtualizedList = React.lazy(() => import("./components/VirtualizeList"));
 
 export const App: React.FC = () => {
   return (
