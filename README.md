@@ -1,1 +1,1 @@
-# react-ssr-mfe-poc
+# Helm & CI Integration - WIP
