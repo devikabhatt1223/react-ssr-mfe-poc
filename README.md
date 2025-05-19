@@ -124,7 +124,6 @@ These utilities enhance code reusability and support efficient development pract
 
 ### Bundle Optimization
  - We configured Webpack to split large bundles into smaller, manageable chunks. This helps ensure that only the required code is loaded for a specific view or component.
- - This is especially beneficial when combined with dynamic imports (e.g., for loading Virtualized and NonVirtualized Lists lazily).
  - Common dependencies are extracted into shared chunks to avoid duplication across bundles.
 
 ### Notes
